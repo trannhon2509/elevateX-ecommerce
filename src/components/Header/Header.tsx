@@ -16,8 +16,8 @@ const AppHeader: React.FC = () => {
 
   return (
     <div className='app-header'>
-      <Flex justify='space-between' className="app-header__container">
-        <div className=''>
+      <Flex justify='space-between' wrap={'nowrap'} className="app-header__container">
+        <Flex  wrap={'nowrap'} >
           <Button type="text">Kênh người bán</Button>
           <Button type="text">Trở thành người bán</Button>
           <Popover placement="bottom" content={
@@ -32,12 +32,12 @@ const AppHeader: React.FC = () => {
             <Button type='text'>Tải ứng dụng</Button>
           </Popover>
           <Button type="text">Kết nối</Button>
-        </div>
-        <div>
+        </Flex>
+        <Flex  wrap={'nowrap'}>
           <LanguageDropdown />
           <Button type="text" icon={<UserAddOutlined />}>Đăng kí</Button>
           <Button type="text" icon={<LoginOutlined />}>Đăng nhập</Button>
-        </div>
+        </Flex>
       </Flex>
 
       <Flex style={{ padding: '10px 0px' }} className="app-header__menu" justify='space-between' align='center' gap={10} rootClassName="app-header__container">

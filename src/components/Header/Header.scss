@@ -1,0 +1,55 @@
+@use '../../styles/variable.scss' as *;
+
+.app-header {
+  background: $header-background-color;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .app-header__container {
+    min-width: 65%;
+    @media (max-width: 1024px) {
+      min-width: 100%;
+    }
+    
+    button {
+      color: white !important;
+    }
+  }
+  .app-header__search {
+    width: 100%; // Added line
+    .ant-input-affix-wrapper {
+      border-radius: 0 !important;
+    }
+    .ant-btn {
+      border-radius: 0 !important;
+      border: 0 !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .app-header__container {
+      display: none; 
+    }
+    button {
+      width: 100%;
+      text-align: left;
+    }
+    .app-header__menu {
+      display: none;
+    }
+    .app-header__menu-mobile {
+      display: block;
+      margin: 10px !important;
+    }
+    .app-header__search {
+      display: block; 
+      width: 100%;
+    }
+    
+  }
+  @media (min-width: 769px) {
+    .app-header__menu-mobile {
+      display: none;
+    }
+  }
+}

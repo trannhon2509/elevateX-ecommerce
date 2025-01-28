@@ -1,0 +1,9 @@
+@use './variable.scss' as *;
+@use './mixin.scss' as *;
+
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: $font-family;
+    font-size: $font-size-base;
+}

@@ -10,17 +10,22 @@ function App() {
           <Route
             key={index}
             path={route.path}
-            element={React.createElement(route.layout, {}, React.createElement(route.page))}
+            element={React.createElement(
+              route.layout,
+              { children: React.createElement(route.page) } 
+            )}
           />
         ))}
         {privateRoutes.map((route, index) => (
           <Route
             key={index}
             path={route.path}
-            element={React.createElement(route.layout, {}, React.createElement(route.page))}
+            element={React.createElement(
+              route.layout,
+              { children: React.createElement(route.page) } 
+            )}
           />
         ))}
-       
       </Routes>
     </Router>
   );

@@ -80,7 +80,7 @@ const NotificationsPopover: React.FC = () => {
             </Image.PreviewGroup>
           </List.Item>
         )}
-        style={{ width: `${popoverWidth}px`, maxHeight: '400px', overflowY: 'auto' }}
+        style={{ width: `${popoverWidth}px`, maxHeight: '800px', overflowY: 'auto' }}
       />
     } placement="bottomRight">
       <Button type='text' size='large' onClick={(e) => e.preventDefault()} style={{ color: 'white' }} icon={<BellOutlined style={{ fontSize: '2rem' }} />}></Button>

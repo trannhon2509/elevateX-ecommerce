@@ -16,7 +16,9 @@ const AppHeader: React.FC = () => {
 
   return (
     <div className='app-header'>
-      <Flex justify='space-between' wrap={'nowrap'} className="app-header__container">
+      <Flex justify='space-between' wrap={'nowrap'} className="app-header__container" style={{
+        padding: '10px 0 0 0',
+      }}>
         <Flex  wrap={'nowrap'} >
           <Button type="text">Kênh người bán</Button>
           <Button type="text">Trở thành người bán</Button>
@@ -40,7 +42,7 @@ const AppHeader: React.FC = () => {
         </Flex>
       </Flex>
 
-      <Flex style={{ padding: '10px 0px' }} className="app-header__menu" justify='space-between' align='center' gap={10} rootClassName="app-header__container">
+      <Flex style={{ padding: '10px 0px 15px 0' }} className="app-header__menu" justify='space-between' align='center' gap={10} rootClassName="app-header__container">
         <Button type="text" size='large' icon={<ShopOutlined style={{ fontSize: '3rem' }} />}><h1>ElevateX</h1></Button>
         <div style={{ width: '100%', padding: '3px', backgroundColor: 'white' }}>
           <Search

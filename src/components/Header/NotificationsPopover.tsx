@@ -1,8 +1,25 @@
-import React from 'react';
-import { Popover, List, Avatar, Image, Button, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Popover, List, Avatar, Image, Button, Flex } from 'antd';
 import { BellOutlined, RightOutlined } from '@ant-design/icons';
 
 const NotificationsPopover: React.FC = () => {
+  const [popoverWidth, setPopoverWidth] = useState(800);
+
+  useEffect(() => {
+    const updatePopoverWidth = () => {
+      if (window.innerWidth < 768) {
+        setPopoverWidth(300);
+      } else if (window.innerWidth < 1024) {
+        setPopoverWidth(500);
+      } else {
+        setPopoverWidth(600);
+      }
+    };
+    updatePopoverWidth();
+    window.addEventListener('resize', updatePopoverWidth);
+    return () => window.removeEventListener('resize', updatePopoverWidth);
+  }, []);
+
   const notificationData = Array.from({ length: 10 }).map((_, i) => ({
     href: 'https://ant.design',
     title: `ant design part ${i}`,
@@ -10,22 +27,22 @@ const NotificationsPopover: React.FC = () => {
     description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
     content: [
       'https://preview.redd.it/9zb2a445dlu91.jpg?auto=webp&s=24a89bac74c42ffb3f1678c6a91174718882f252',
-      'https://images3.alphacoders.com/132/1325638.jpeg',
       'https://preview.redd.it/9zb2a445dlu91.jpg?auto=webp&s=24a89bac74c42ffb3f1678c6a91174718882f252',
-      'https://images3.alphacoders.com/132/1325638.jpeg',
+      'https://preview.redd.it/9zb2a445dlu91.jpg?auto=webp&s=24a89bac74c42ffb3f1678c6a91174718882f252',
+      'https://preview.redd.it/9zb2a445dlu91.jpg?auto=webp&s=24a89bac74c42ffb3f1678c6a91174718882f252',
     ],
   }));
 
   const getImageWidth = (count: number) => {
     switch (count) {
       case 1:
-        return 600;
+        return popoverWidth-20;
       case 2:
-        return 300;
+        return popoverWidth/2-30;
       case 3:
-        return 200;
+        return popoverWidth/3-20;
       case 4:
-        return 150;
+        return popoverWidth/4-20;
       default:
         return 150;
     }
@@ -55,15 +72,15 @@ const NotificationsPopover: React.FC = () => {
               description={item.description}
             />
             <Image.PreviewGroup>
-              <Space>
+              <Flex wrap='wrap' gap={5}>
                 {item.content.map((image, index) => (
                   <Image key={index} width={getImageWidth(item.content.length)} src={image} alt={`item ${index}`} />
                 ))}
-              </Space>
+              </Flex>
             </Image.PreviewGroup>
           </List.Item>
         )}
-        style={{ width: '800px' }}
+        style={{ width: `${popoverWidth}px`, maxHeight: '400px', overflowY: 'auto' }}
       />
     } placement="bottomRight">
       <Button type='text' size='large' onClick={(e) => e.preventDefault()} style={{ color: 'white' }} icon={<BellOutlined style={{ fontSize: '2rem' }} />}></Button>

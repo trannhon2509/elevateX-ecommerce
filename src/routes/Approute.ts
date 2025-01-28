@@ -8,7 +8,7 @@ interface Route {
     path: string;
     page: React.ComponentType;
     exact: boolean;
-    layout: React.ComponentType;
+    layout: React.ComponentType<{ children: React.ReactNode }>;
 }
 
 const publicRoutes: Route[] = [

@@ -1,0 +1,21 @@
+@use '../../styles/variable.scss' as *;
+
+.footer {
+  background: $primary-color;
+  color: white;
+  padding: 40px 50px;
+
+  .title {
+    color: white;
+  }
+
+  .text {
+    color: white;
+  }
+
+  .social-icon {
+    font-size: 24px;
+    color: #ffffff;
+  }
+}
+

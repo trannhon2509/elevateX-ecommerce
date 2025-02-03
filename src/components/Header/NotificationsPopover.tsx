@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, memo } from 'react';
 import { Popover, List, Avatar, Image, Button, Flex } from 'antd';
 import { BellOutlined, RightOutlined } from '@ant-design/icons';
 
@@ -33,20 +33,22 @@ const NotificationsPopover: React.FC = () => {
     ],
   }));
 
-  const getImageWidth = (count: number) => {
+  const getImageWidth = useCallback((count: number) => {
     switch (count) {
       case 1:
-        return popoverWidth-20;
+        return popoverWidth - 20;
       case 2:
-        return popoverWidth/2-30;
+        return popoverWidth / 2 - 30;
       case 3:
-        return popoverWidth/3-20;
+        return popoverWidth / 3 - 20;
       case 4:
-        return popoverWidth/4-20;
+        return popoverWidth / 4 - 20;
       default:
         return 150;
     }
-  };
+  }, [popoverWidth]);
+
+  console.log('NotificationsPopover rendered');
 
   return (
     <Popover content={
@@ -88,4 +90,4 @@ const NotificationsPopover: React.FC = () => {
   );
 };
 
-export default NotificationsPopover;
+export default memo(NotificationsPopover);

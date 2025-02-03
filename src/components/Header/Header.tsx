@@ -1,134 +1,67 @@
-import React, { useState } from 'react';
+import React, { memo, } from 'react';
 import './Header.scss';
-import { Button, Drawer, Flex, Input, Popover, QRCode, Space } from 'antd';
-import { UserAddOutlined, LoginOutlined, AppleOutlined, AndroidOutlined, ShopOutlined, MenuOutlined, ShoppingCartOutlined, } from '@ant-design/icons';
+import { Row, Col, Typography, Space, Popover, QRCode, Input } from 'antd';
+import { AndroidFilled, AppleFilled, FacebookFilled, ShopFilled, TikTokFilled, UserAddOutlined, LoginOutlined, NotificationOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import type { GetProps } from 'antd';
-import LanguageDropdown from './LanguageDropdown';
-import NotificationsPopover from './NotificationsPopover';
-import CartPopover from './CartPopover';
 
 type SearchProps = GetProps<typeof Input.Search>;
-
+const { Text, Title } = Typography;
+const { Search } = Input;
+const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 const AppHeader: React.FC = () => {
-  const { Search } = Input;
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
   return (
-    <div className='app-header'>
-      <Flex justify='space-between' wrap={'nowrap'} className="app-header__container" style={{
-        padding: '10px 0 0 0',
-      }}>
-        <Flex  wrap={'nowrap'} >
-          <Button type="text">Kênh người bán</Button>
-          <Button type="text">Trở thành người bán</Button>
-          <Popover placement="bottom" content={
-            <div>
-              <QRCode value={'https://ant.design/'} />
-              <Flex gap={10}>
-                <p><AndroidOutlined /> Android</p>
-                <p><AppleOutlined /> IOS</p>
-              </Flex>
-            </div>
-          }>
-            <Button type='text'>Tải ứng dụng</Button>
-          </Popover>
-          <Button type="text">Kết nối</Button>
-        </Flex>
-        <Flex  wrap={'nowrap'}>
-          <LanguageDropdown />
-          <Button type="text" icon={<UserAddOutlined />}>Đăng kí</Button>
-          <Button type="text" icon={<LoginOutlined />}>Đăng nhập</Button>
-        </Flex>
-      </Flex>
-
-      <Flex style={{ padding: '10px 0px 15px 0' }} className="app-header__menu" justify='space-between' align='center' gap={10} rootClassName="app-header__container">
-        <Button type="text" size='large' icon={<ShopOutlined style={{ fontSize: '3rem' }} />}><h1>ElevateX</h1></Button>
-        <div style={{ width: '100%', padding: '3px', backgroundColor: 'white' }}>
-          <Search
-            bordered={false}
-            className='app-header__search'
-            placeholder="🔍 Bạn muốn mua gì hôm nay? 🛒"
-            allowClear
-            enterButton
-            size="large"
-            onSearch={onSearch}
-          />
-        </div>
-        <Space>
-          <NotificationsPopover />
-          <CartPopover />
-        </Space>
-      </Flex>
-
-      <div className="app-header__search app-header__menu-mobile">
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          margin: '0 10px',
-        }}>
-          <Input
-            bordered={false}
-            placeholder="🔍 Bạn muốn mua gì hôm nay? 🛒"
-            allowClear
-            size="large"
-            style={{
-              backgroundColor: 'white',
-            }}
-          />
-          <Space>
-            <Button type="text" size='large' style={{
-            }} icon={<ShoppingCartOutlined style={{
-              fontSize: '2rem',
-              color: 'white',
-            }} />}></Button>
-            <Button type="text" size='large' style={{
-            }} onClick={() => setDrawerVisible(true)} icon={<MenuOutlined style={{
-              fontSize: '2rem',
-              color: 'white',
-            }} />}></Button>
+    <Row justify="center" className="header-row">
+      <Col xs={0} sm={0} md={24} lg={24} xl={16}>
+        <Row justify={'space-between'} className="header-top-row">
+          <Space >
+            <Text className="header-text">Kênh người bán</Text>
+            <Popover placement="bottomLeft" title={<QRCode type="canvas" value="https://ant.design/" />} content={<><AndroidFilled /> Android <AppleFilled /> IOS</>}>
+              <Text className="header-text">| Ứng dụng |</Text>
+            </Popover>
+            <Text className="header-text">Kết nối <Space><TikTokFilled /><FacebookFilled /></Space></Text>
           </Space>
-        </div>
-      </div>
-
-      <Drawer
-        title="Menu"
-        placement="left"
-        onClose={() => setDrawerVisible(false)}
-        visible={drawerVisible}
-        className='app-header__drawer'
-      >
-        <Flex justify='center' gap={10} style={{
-          margin: '0 0 10px 0',
-        }}>
-          <Button type="default" icon={<UserAddOutlined />}>Đăng kí</Button>
-          <Button type="primary" icon={<LoginOutlined />}>Đăng nhập</Button>
-        </Flex>
-        
-        <Flex vertical gap={10}>
-          <Button type="text">Kênh người bán</Button>
-          <Button type="text">Trở thành người bán</Button>
-          <Button type="text">Kết nối</Button>
-          <Popover placement="bottom" content={
-            <div>
-              <QRCode value={'https://ant.design/'} />
-              <Flex gap={10}>
-                <p><AndroidOutlined /> Android</p>
-                <p><AppleOutlined /> IOS</p>
-              </Flex>
+          <Space>
+            <Text className="header-text"><UserAddOutlined /> Đăng kí</Text>
+            <Text className="header-text"><LoginOutlined /> Đăng nhập</Text>
+          </Space>
+        </Row>
+        <Row justify={'start'} align={'middle'}>
+          <Col xs={0} sm={0} md={0} lg={0} xl={4}>
+            <Space><ShopFilled className="shop-icon" />
+              <Title className="header-title">ElevateX</Title></Space>
+          </Col>
+          <Col xs={24} sm={24} md={24} lg={24} xl={18}>
+            <div className="search-container">
+              <Search className='search-header' size='large' variant='borderless' placeholder="🔍 Bạn muốn mua gì? 🛒" onSearch={onSearch} allowClear enterButton />
             </div>
-          }>
-            <Button type='text'>Tải ứng dụng</Button>
-          </Popover>
-        </Flex>
-
-        <Space>
-          <NotificationsPopover />
-          <CartPopover />
-        </Space>
-      </Drawer>
-    </div>
+          </Col>
+          <Col xs={0} sm={0} md={0} lg={0} xl={2}>
+            <Row justify={'end'}>
+              <Space size={'large'}>
+                <Popover placement="bottomRight" title={'Thông báo mới nhất'} content={
+                  <div>
+                    <p>Thông báo 1</p>
+                    <p>Thông báo 2</p>
+                  </div>
+                }>
+                  <NotificationOutlined className="icon" />
+                </Popover>
+                <Popover placement="bottomRight" title={'Sản phẩm đã thêm gần nhất'} content={
+                  <div>
+                    <p>Thông báo 1</p>
+                    <p>Thông báo 2</p>
+                  </div>
+                }>
+                  <ShoppingCartOutlined className="icon" />
+                </Popover>
+              </Space>
+            </Row>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
   );
 };
 
-export default AppHeader;
+export default memo(AppHeader);

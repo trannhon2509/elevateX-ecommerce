@@ -1,4 +1,3 @@
-import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import Home from "../pages/Home/Home";
 import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
@@ -16,7 +15,7 @@ const publicRoutes: Route[] = [
 ];
 
 const privateRoutes: Route[] = [
-    { path: RoutePath.SHOPPINGCART, page: ShoppingCart, exact: true, layout: AdminLayout },
+    { path: RoutePath.SHOPPINGCART, page: ShoppingCart, exact: true, layout: MainLayout },
 ];
 
 export { publicRoutes, privateRoutes };

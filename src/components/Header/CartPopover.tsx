@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Popover, List, Button } from 'antd';
 import { ShoppingCartOutlined, RightOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import RoutePath from '../../routes/RoutePath';
 
 const CartPopover: React.FC = () => {
+  const navigate = useNavigate();
   const data = Array.from({ length: 23 }).map((_, i) => ({
     title: `ant design part ${i}`,
     productImg: `https://preview.redd.it/9zb2a445dlu91.jpg?auto=webp&s=24a89bac74c42ffb3f1678c6a91174718882f252`,
   }));
+
+  console.log('CartPopover rendered');
 
   return (
     <Popover
@@ -23,7 +28,7 @@ const CartPopover: React.FC = () => {
         }}
         dataSource={data}
         footer={<div>
-          <Button type='primary' block onClick={(e) => e.preventDefault()}>Xem giỏ hàng <RightOutlined /></Button>
+          <Button type='primary' block onClick={() => navigate(RoutePath.SHOPPINGCART)}>Xem giỏ hàng <RightOutlined /></Button>
         </div>}
         renderItem={(item) => (
           <List.Item key={item.title} extra={<div>100.000 VNĐ</div>}>
@@ -46,4 +51,4 @@ const CartPopover: React.FC = () => {
   );
 };
 
-export default CartPopover;
+export default memo(CartPopover);

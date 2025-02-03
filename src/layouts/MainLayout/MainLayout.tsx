@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, memo } from 'react'
 import { Layout } from 'antd'
 import AppHeader from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
@@ -12,11 +12,14 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <Layout style={{ minHeight: '100vh', backgroundColor: 'white' }}>
-      <AppHeader />
+      <MemoizedAppHeader />
       <Content>{children}</Content>
-      <Footer/>
+      <MemoizedFooter />
     </Layout>
   )
 }
+
+const MemoizedAppHeader = memo(AppHeader);
+const MemoizedFooter = memo(Footer);
 
 export default MainLayout

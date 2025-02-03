@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Dropdown, Button } from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
@@ -23,6 +23,8 @@ const LanguageDropdown: React.FC = () => {
     },
   ];
 
+  console.log('LanguageDropdown rendered');
+
   return (
     <Dropdown menu={{ items }}>
       <Button type='text' onClick={(e) => e.preventDefault()} style={{ color: 'white' }} icon={<GlobalOutlined />}>
@@ -32,4 +34,4 @@ const LanguageDropdown: React.FC = () => {
   );
 };
 
-export default LanguageDropdown;
+export default memo(LanguageDropdown);
